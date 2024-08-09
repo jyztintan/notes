@@ -1,0 +1,39 @@
+# Order Statistics of vertex
+
+We can implement the order statistic function by selecting the k-th smallest element `select(k)` or finding the rank of a specific vertex `rank(v)`
+
+## Rank(v)
+
+Given a key **v**, determine what is its rank (1-based index) in the sorted order of the BST elements. That is, Rank(FindMin()) = 1 and Rank(FindMax()) = **N**. If **v** does not exist, we can report -1
+
+```java
+node = root of BST
+ans = 0
+while (v != node.key) 
+		if (v < node.key)
+				node = node.left
+		else
+				ans += node.left.size + 1
+				node = node.right
+ans += node.left.size + 1
+return ans
+```
+
+## Select(k)
+
+Find the **k**-th smallest element in the BST. That is, Select(1) = FindMin() and Select(**N**) = FindMax()
+
+```java
+node = root of BST
+left = node.left.size
+while (left + 1 != k)
+		if (left + 1 > k)
+				node = node.left
+		else 
+				node = node.right
+return node
+```
+
+## Implementation
+
+For the effective implementation of `rank(v)` and `select(k)` , store an additional attribute in each vertex → size, which represents the size of the subtree rooted in that vertex (including the root)

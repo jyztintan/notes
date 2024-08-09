@@ -1,0 +1,56 @@
+# Union of 2 Arrays
+
+## Approach 1: Linear Search (naive)
+
+### Intersection
+
+- For every element v in array A, loop through array B
+    - If v exists in b, append to output array C
+
+### Set Union
+
+- For each element v in array A, loop through B
+    - If v does not exist in Array B, append to output array C
+    - Append all elements in B to output array C
+
+#### Time Complexity: $O(n * m)$, $n = len(A)$, $m = len(B)$
+
+## Approach 2: Binary Search (better)
+
+Assumes that arrays are sorted, so use binary search instead of linear.
+
+### Intersection
+
+- For every element v in array A, **binary search** through array B
+    - If v exists in b, append to output array C
+
+#### Time Complexity: $O(n \log m)$, $n = len(A)$, $m = len(B)$
+
+### Set Union
+
+- For each element v in array A, **binary search** through B
+    - If v does not exist in Array B, append to output array C
+    - Append all elements in B to output array C
+
+#### Time Complexity: $O(n \log m + m \log n)$, $n = len(A)$, $m = len(B)$
+
+## Approach 3: Merge Subroutine (best)
+
+Assumes that arrays, elements are non-decreasing
+
+### Intersection
+
+- When $v_a == v_b$, append to output array C, then increment both pointers
+- When  $v_a > v_b$ , increment B pointer
+- When  $v_b > v_a$ , increment A pointer
+- Repeat until either pointer goes out of bounds
+
+### Set Union
+
+- When  $v_a > v_b$ , append $v_b$  to output array C and increment B pointer
+- When  $v_b > v_a$ , append $v_b$  to output array C and increment A pointer
+- When  $v_a == v_b$ , append $v_a$ to output array C and increment both pointers
+
+#### Time Complexity: $O(n + m)$, $n = len(A)$, $m = len(B)$
+
+- Iterating through A and B once

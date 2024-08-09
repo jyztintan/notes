@@ -1,0 +1,36 @@
+# Table ADT
+
+In a Table ADT, these operations are expected to be done in $O(1)$  time
+
+1. Search(v) — determine if **v** exists in the ADT or not
+2. Insert(v) — insert **v** into the ADT
+3. Remove(v)/Delete(v) — remove **v** from the ADT
+4. Contains(v) - returns a boolean if v exists in the ADT
+5. Size() - Returns the number of keys in the ADT 
+
+> 💡 Comparing our implementations of `Insert` and `Remove` with List ADTs, Table ADTs use the actual values to insert/remove while List ADTs uses index.
+
+Note that by the non-comparison based nature of Table ADTs, we are able to do searching faster, but at the trade off of ordering-based operations such as `max` or `successor`
+
+## Direct Addressing Table
+
+We use an initially empty Boolean array A of size M to implement the following operations directly:
+
+1. Search(v): Check if **A[v]** is true (filled) or false (empty),
+2. Insert(v): Set **A[v]** to be true (filled),
+3. Remove(v): Set **A[v]** to be false (empty).
+
+Can add satellite data instead of just using a Boolean array to record the existence of keys. 
+
+### Application of DAT
+
+- Postal codes that maps addresses to a number
+- Keyboard that maps (physical) keys to an ASCII value
+
+### Limitations of DAT
+
+- Keys must be non-negative Integer values
+- Range of keys must be small if not we use ALOT of space
+- Keys must be dense (to not waste space)
+
+> 💡 The idea behind using Direct Address Table is to just use a super huge array, so that we can guarantee getting our value in $O(1)$ time

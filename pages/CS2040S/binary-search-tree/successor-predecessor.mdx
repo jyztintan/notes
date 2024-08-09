@@ -1,0 +1,45 @@
+# Finding Successor and Predecessor of a vertice
+
+## Successor(v)
+
+```java
+If current has a right child:
+		return searchMin(this.right) //successor is the minimum value of the right subtree
+else:
+		parent = this.parent
+		current = this
+		//while the vertex is not the root
+		//and it is not the right child of its parent (then it will be > parent)
+		while (parent != null) && (current == parent.right) 
+				current = parent
+				parent = current.parent
+
+		if parent == null: //the root vertex
+				return current
+
+		else return parent
+```
+
+Implemented in $O(h)$  time complexity, where $h$ is the height of the BST.
+
+## Predecessor(v)
+
+```java
+If current has a left child:
+		return searchMax(this.left) //successor is the minimum value of the right subtree
+else:
+		parent = this.parent
+		current = this
+		//while the vertex is not the root
+		//and it is not the right child of its parent (then it will be > parent)
+		while (parent != null) && (current == parent.left) 
+				current = parent
+				parent = current.parent
+
+		if parent == null: //the root vertex
+				return current
+
+		else return parent
+```
+
+Implemented in $O(h)$  time complexity, where $h$ is the height of the BST.

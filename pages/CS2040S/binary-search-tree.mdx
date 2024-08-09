@@ -1,0 +1,63 @@
+# Binary Search Tree
+
+
+## BST Property
+
+- Every vertex can have up to 2 children
+- We allow duplicate integers by storing a frequency attribute of the duplicate key so that:
+- Every vertex in the left subtree of a given vertex must carry a value **strictly** smaller than that of the given vertex
+- Every vertex in the right subtree of a given vertex must carry a value **strictly** larger than that of the given vertex
+- Dynamic data structure → remains efficient after many update operations
+
+## Structure
+
+Root vertex - The unique vertex with no parent
+
+Leaf vertices - Vertices with no children
+
+Internal vertices - Vertices that are not leaves 
+
+> 💡 Occasionally, the root vertex is excluded from the definition of internal vertex as a BST with only the root vertex fits the definition of a leaf as well
+
+## Applications/Operations
+
+Balanced BSTs are effective data structures for implementing Table ADTs where keys must be **ordered**. 
+
+> 💡 Hash table perform table ADT operations inefficiently, so choosing between implementing a hash table or BST depends on which functions we want to optimise
+
+
+[Search(v)](./binary-search-tree/search.mdx)
+
+[Successor(v)/Predecessor(v)](./binary-search-tree/successor-predecessor.mdx)
+
+[In-Order Traversal](./binary-search-tree/in-order-traversal.mdx)
+
+[Insert(v)/Remove(v)](./binary-search-tree/insert-remove.mdx)
+
+[Select(k)/Rank(v)](./binary-search-tree/select-rank.mdx)
+
+Note that it is possible for $h = N$, where $N$  is the number of elements in the BST when the BST is fully skewed one direction.
+
+> 💡 If we used hash table, where keys are in “random” order, these new operations cannot be done **efficiently** for `rank(v)` and `select(k)` as the keys are not ordered
+
+### Bounds of BST Height
+
+**Lower Bound:** The height in which we can insert N elements in perfect order such that the BST is perfectly balanced.
+
+$h = \lfloor \log_2N \rfloor$ 
+
+Upper **Bound:** The height in which we can insert N elements in ascending order to get skewed right BST
+
+$h = N-1$
+
+## No of structurally different BSTs with xx Elements
+
+Number of permutations = $\frac{2n\choose n}{n+1}$ 
+
+## Min Vertices given xx Height
+
+$= h+1$
+
+## Max Vertices given xx Height
+
+$= 2^{h+1} -1$

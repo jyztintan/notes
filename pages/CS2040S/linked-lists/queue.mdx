@@ -1,0 +1,27 @@
+# Queue
+
+Abstract Data Type, in which collection are kept in order
+
+Implemented usually by using a Singly Linked List
+
+Addition of items to the back, Removal of items from the front → First-in-first-out (FIFO) Data Structure
+
+# Implementation Issues with using (circular) Array
+
+- Removal of elements at the front of a compact array → shift N-1 items → O(N) slow performance
+- Implementing a circular array is okay if we are sure queue size always < array size
+- However, if our array implementation of queue is full, we may need to enlarge (double) the size of the array → re-copying items from index front to back in O(N) process.
+
+# Implementing Queue using 2 stacks
+
+- 2 Stacks, one for ingoing elements, one to store outgoing elements
+- Put the elements into the ingoing stack
+- If enqueue(), push the enqueueing element into the ingoing stack
+- If dequeue(), pop the elements from the ingoing stack to the outgoing stack, then pop() the first element of the outgoing stack
+
+# Implementing Queue using Singly Linked List
+
+- Only need the 2 extreme ends of the List, for insertion (enqueue) and removal (dequeue)
+- Note that insertion after tail and removal at head from Singly Linked List are fast, O(1).
+- Designate head/tail as front/end of queue respectively.
+- In this implementation, enqueueing and dequeueing operations are all O(1).

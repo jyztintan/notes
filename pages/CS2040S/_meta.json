@@ -1,0 +1,12 @@
+{
+  "sorting": "Sorting",
+  "linked-lists": "Linked List",
+  "binary-heap": "Binary Heap",
+  "ufds": "Union-Find Disjoint Sets",
+  "hash-table": "Hash Table",
+  "binary-search-tree": "Binary Search Tree",
+  "graph-ds": "Graph Data Structures",
+  "graph-traversal": "Graph Traversal",
+  "sssp": "Single Source Shortest Path",
+  "mst": "Minimum Spanning Tree"
+}

@@ -1,0 +1,99 @@
+# Union-Find Disjoint sets
+
+Used to model a collection of disjoint sets
+
+Each tree represents a disjoint set (collection of disjoint sets → forest of trees)
+
+Root of each tree is the representative item of the disjoint set
+
+
+## Implementation
+
+Represented with an array `p` of size `N` where `p[i] = parent(i)` and if `p[i] = i` , then `i` is the root of the tree → representative item of the set that contains item `i` 
+
+Another array `rank` of size `N` , rank[i] = upperbound of the height of subtree rooted at vertex `i`
+
+## Usages (In nearly $O(1)$  time)
+
+- Determine which set an item belongs to
+- Test if 2 items are in the same set
+- Union 2 disjoint sets when necessary
+- Find connected components in an undirected graph
+- Kruskal’s algorithm for Minimum Spanning Tree problem
+
+## Heuristics
+
+### Union-Rank
+
+## Operations
+
+### Initialize(N, M)
+
+#### Implementation
+
+1. Default form is Initialize(N, N), with all p[i] = i and rank[i] = 0 → N disjoint sets/items
+2. We randomly pick 2 disjoint sets and merge them until we have only M disjoint sets.
+
+> 💡 Due to the union-by-rank heuristics and randomness → unlikely to create tall trees
+
+#### Time Complexity
+
+$O(N)$
+
+### FindSet(i)
+
+#### Implementation
+
+From vertex i, recursively go up the tree, until we find its root (when `p[i] = i` )
+
+#### Time Complexity
+
+Path-compression heuristic after each call of FindSet(i) → every single vertex along the path from vertex i to root knows that the root is their representative item → point directly in $O(1)$
+
+
+> ‼️ By path-compression heuristic, each path from root to median vertices are  compressed
+
+> 💡 Note that rank value of rank[1] is now incorrect as vertex 1 now becomes a leaf. We don’t update it because it is expensive.
+
+### IsSameSet(i, j)
+
+#### Implementation
+
+Simply check if FindSet(i) == FindSet(j)
+
+> 💡 This function is used extensively in Kruskal’s algorithm → to check if they are already connected or not
+
+#### Time Complexity
+
+As it only calls FindSet twice, we can assume $O(1)$  time ??
+
+> 💡 FindSet function is invoked in IsSameSet, so path-compression heuristic is implicitly used
+
+### UnionSet(i, j)
+
+#### Implementation
+
+```java
+if items i and j come from 2 disjoint sets initially {
+		if i.rank (height) > j.rank (height) {
+				link representative (root) of j to representative (root) of i;
+		else {
+				link representative (root) of i to representative (root) of j;
+} else nothing;
+```
+
+#### Time Complexity
+
+$O(1)$ 
+
+#### Heuristics
+
+- Union-by-rank heuristic in action → resultant tree is relatively short, will never exceed original height + 1 (only in worst case where both trees are of equal height)
+- isSameSet, FindSet function is invoked in UnionSet, so path-compression heuristic is implicitly used
+- Each time path-compression heuristic compresses a path, at least one rank value will be incorrect. We do not fix these rank values as they are merely guiding heuristics for this UnionSet function.
+
+## Actual Time Complexities
+
+We say that FindSet(i), IsSameSet(i, j), UnionSet(i, j) runs in $O(1)$ time but they actually run in $O(α(N))$ time, if our UFDS is implemented with both path-compression and union-by-rank heuristics. , where α(N) represents the inverse Ackermann function. 
+
+For practical usage of this UFDS data structure (assuming **N ≤ 1M**), we have α(**1M**) ≈ 1

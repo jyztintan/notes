@@ -1,0 +1,31 @@
+# Quick Select
+
+Suppose you have an array of items. How do you find the ***k***-th smallest item in that array?
+
+- Option 1: Sort the whole array. Runtime? **$O(n \log n)$**
+- Option 2: Partial selection sort, select the smallest item in each iteration, repeat for $k$-iterations. Runtime? **$O(nk)$**.
+    - If we have $k ≈ n$, then we have **$O(n²)$**!
+- Option 3: What if we can combine options 1 and 2? Can we perform the faster sorting algorithm, but stop halfways when we get the **$*k$-***th smallest item?
+
+## Inducing Binary Search
+
+- Combine Quick Sort’s partitioning algorithm with binary search
+- Step 1: Randomly pick a pivot
+- Step 2: Partition array about the pivot
+    - Elements < pivot, s1
+    - Elements > pivot, s2
+    - Handle elements == pivot by either allocating it to a specific array, or by randomising the array it is allocated to → affects time complexity
+- Step 3: Binary Search
+    - If `PivotIndex == k - 1` , return the pivot element.
+    - If `PivotIndex > k - 1`, our target is to the left so repeat the algorithm with [left, PivotIndex - 1]
+    - If `PivotIndex < k - 1`, our target is to the right so repeat the algorithm with [PivotIndex + 1, right]
+
+#### Expected Time Complexity $O(N)$
+
+## $k$-th largest elements
+
+- Change target index to $N-k$ instead of $k - 1$
+- Change conditions
+    - If `N - k == PivotIndex`, we are done
+    - If `N - k < PivotIndex`, our target is to the left, [left, PivotIndex - 1]
+    - If `N - k > PivotIndex`, our target is to the right, [PivotIndex + 1, right]

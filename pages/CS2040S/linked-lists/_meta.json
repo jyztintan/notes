@@ -1,0 +1,8 @@
+{
+  "arrays": "Arrays",
+  "singly-linked-lists": "Singly-Linked Lists",
+  "stack": "Stack",
+  "queue": "Queue",
+  "doubly-linked-lists": "Doubly-Linked Lists",
+  "deque" : "Deque"
+}

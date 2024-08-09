@@ -1,0 +1,21 @@
+# Merge Sort
+
+## Implementation
+
+- Classic Divide-and-Conquer Algorithm
+- Recursively sorts the 2 halves of the lists
+- Merges the 2 lists together efficiently
+
+
+## Space/Time Complexity
+
+- A one element list is already sorted! (Base case) → $O(1)$
+- Merging a sorted list from two sorted lists → $O(N)$ = work done at every level
+- Number of layers in merge sort = $\log n$
+- Hence merge sort uses $O(n\log n)$  time complexity
+- $O(N)$  space to store the auxiliary array
+
+
+## Stablility
+
+- Most merge sorts are inherently stable because if leftValue ≤ rightValue, process the leftValue first

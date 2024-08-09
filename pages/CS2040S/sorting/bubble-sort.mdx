@@ -1,0 +1,19 @@
+# Bubble Sort
+
+## Implementation
+
+- Iterates through array and swaps if $left > right$, esentially “floats” elements to the right of the array $n- 1$ times
+- Notice that after $k$  iteration of the sorting, the largest $k$ -th elements become sorted
+
+## Space/Time Complexity
+
+- Worst Case: $O(N^2)$ for example in decreasing lists
+- No extra space is used, so $O(1)$  space complexity
+
+## Early Termination
+
+Optimised Bubble sort terminates if after one iteration, there is no swapping at all. This means that the array is already sorted so the process can terminate
+
+However, time is still $O(N^2)$  by worst case.
+
+## Bubble sort is a stable sort!

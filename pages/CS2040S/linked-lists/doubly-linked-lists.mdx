@@ -1,0 +1,50 @@
+# Doubly-Linked Lists
+
+## Properties
+
+- 99% same as Singly Linked List, but now each vertex contains 2 pointers.
+- `next`pointer is the same as the SLL version, linking items $a_i$ to $a_{i+1}$
+- `prev`pointer links items $a_i$ to $a_{i-1}$
+- Access to head and tail pointer
+
+Now, it is possible to move/iterate backwards albeit at the expense of 2 times the memory usage requirements as now each vertex records one additional pointer → addressing the less efficient removal at tail case O(N) of SLL.
+
+Since we now have one more pointer for each vertex, their values need to be updated too throughout our insertion/removal operations
+
+### Getting/Searching Elements
+
+Sequential access from head element. $O(N)$
+
+Best case, v found at first pos. $O(1)$
+
+Worst case, v not found in list, required $O(N)$ scan to determine.
+
+> 💡 peekFront() and peekBack() are exceptions that use the head/tail pointer for instant $O(1)$ access
+
+### Inserting Elements
+
+- Insert at head, before current first item. $O(1)$ using head pointer to help.
+    - Create new node
+    - Set node → next to head
+    - Replace head pointer with pointer to new node
+- Insert in empty linked list (similar implementation to insert at head)
+- Insert at position beyond last item (current tail). $O(1)$ using tail pointer to help
+    - Create new node
+    - Set tail → next to new node
+    - Replace tail pointer with pointer to new node
+- Other positions within linked list. Worst case insert at $i = N-1$ where we need to find the item N-2 before the tail → $O(N)$.
+
+### Removing elements
+
+#### Legal
+
+- Remove head, affects head pointer
+    - Set head pointer to head → next (node), remove node. $O(1)$.
+- Remove tail, affects tail pointer
+    - Navigate backwards from tail. $O(1)$.
+- Other positions
+    - Traverse to index, bypass the index node by connecting the previous node → next to `node.next` of the node to be removed. $O(N)$.
+
+#### Illegal
+
+- LinkedList is empty ie if `(head == Null)`

@@ -1,0 +1,55 @@
+# Priority Queue ADT
+
+- Each element has a "priority" and an element with higher priority is served before an element with lower priority
+
+## add(), offer()
+
+Put a new element (key) into the PQ (in some order)
+
+## poll(), peek()
+
+Return an existing element that has the highest priority (key) in the PQ 
+
+Ties between elements are:
+
+- Resolved arbitrarily
+- Broken with standard First-In First-Out (FIFO) rule as with a normal Queue
+
+## Applications of PQ
+
+- Fuel Starvation Issue
+- Emergency queue
+- Priority Lanes
+- Call Centre
+
+## Naive PQ Implementations using (circular) Array or Linked List
+
+### Strategy 1
+
+Content of array is always in correct order ie Highest to lowest priority elements
+
+#### Enqueue
+
+Scan PQ from front to back in $O(N)$ to find correct insertion point and make space (if using array)
+
+- Should use Insertion Sort $O(N)$  time for sorted array > Merge Sort $O (N \log N)$
+
+#### Dequeue
+
+$O(1)$  time complexity, just return the front-most element which has the highest priority
+
+### Strategy 2
+
+Content is not in order but `dequeue()` always returns the highest priority element
+
+#### Enqueue
+
+Simply put the new element at back of PQ, $O(1)$
+
+#### Dequeue
+
+Scan PQ from front to back in $O(N)$ to correctly return the element with the highest priority and close the gap (if using array)
+
+Both strategies have inefficient $O(N)$  operations in it, that’s why we use   
+
+which can carry out our operations in efficient $O(\log N)$  time.

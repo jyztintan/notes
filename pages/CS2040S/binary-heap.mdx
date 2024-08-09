@@ -1,0 +1,144 @@
+# Binary Heap
+
+## Max Heap Property
+
+Each node in a tree has a key which is less than or equal to the key of its parent.
+
+Generally, any object that can be compared can be stored in a Binary Max Heap
+
+## Complete Binary Tree
+
+Every level in the binary tree, is completely filled, except possibly the last level where all vertices are as far left as possible
+
+## Properties
+
+- The largest element is always stored at the root of the tree
+- Height ≤ $O(\log N )$  since we will store it as a complete binary tree
+
+> 💡 Stability of equal highest key: Might need to attach extra info (eg arrival time) to ascertain which is higher/which to take out first
+
+## 1-based Compact Array
+
+Indices of sorted order range from 1 to N
+
+- Parent(i) == $\lfloor i \div 2 \rfloor$
+- left_child(i) == $i \times 2$
+- right_child(i) == $i \times 2 + 1$
+
+## Operations
+
+### Insert
+
+Insertion of new item v into the binary heap can only be done at last index N + 1 to maintain the compact array → enforce complete binary tree property
+
+#### Implementation
+
+HOWEVER, the max heap property may still be violated.
+
+- Perform a bubbleUp operation that fixes the max heap property from the insertion point upwards (if necessary)….
+- Continuous bubbleUp stops when there is no more max heap property violation ie all parent > child
+
+#### Time Complexity
+
+$O(\log N)$ worst case is when we insert a new element v that is greater than the current root value. This insertion would cause the bubbleUp operation from a leaf to the root and therefore runs in  $O(\log N)$ → height of complete binary tree
+
+### ExtractMax()
+
+#### Implementation
+
+Deletion of the maximum element (the root) of the binary max heap requires an existing element to replace the root.
+
+- Remove the root
+- Swap root and vertice at last index N
+- New root most likely violates max heap property, so:
+- Compare with the 2 children and bubbleDown with the larger of the 2 children → to maintain the max heap property
+
+#### Time Complexity
+
+$O(logN)$ worst case is when we swap with element that is smaller than all other nodes. This insertion would cause the bubbleDown operation from the root back to a leaf and therefore run in $O(logN)$ → height of complete binary tree
+
+### Create(A)
+
+Creates a valid Binary Max Heap from an input array A of N integers into an initially empty Binary Max Heap
+
+#### Implementation 1
+
+Simply insert (that is, by calling **Insert(v)** operation) all **N** integers of the input array into an initially empty Binary Max Heap one by one.
+
+#### Time Complexity
+
+Calling of `insert(v)` N times for every element added. Hence, time complexity is $O(N \log N)$.
+
+Worst Case: Sorted ascending array → every new insertion triggers a path from the leaf to the root $O(\log N)$ height.
+
+#### Implementation 2
+
+> 💡 Compact array = Complete binary tree
+
+> 💡 All leaves (i.e., half of the vertices) are Binary Max Heap by default.
+
+Hence, we can only fix Binary Max Heap property (if necessary) only from the last internal vertex back to the root.
+
+You must iterate from N/2 to 1 for bubbleDown in create(A) if not it might fuck up your bubbleDown and violate your completeness invariant
+
+#### Time Complexity
+
+Time complexity seems to be $O((N/2) * \log N) \approx O(N \log N)$ but ….
+
+1. Height of full binary tree of size N is $\log_2 N$
+2. Cost of running bubbleDown(i) is $O(h), h =$  height of subtree rooted at $i$
+3. There are $\lceil N/2 ^ {h+1} \rceil$  vertices at height $h$
+
+```
+At level (leaf + 1) at most 1 swap
+At level (leaf + 2) at most 2 swaps
+…
+…
+number of work = height : at height k, at most k swaps
+```
+
+Thus, time complexity → $O(N)$
+
+### HeapSort()
+
+Extracts elements out from highest to lowest priority by repeated calling ExtractMax() N times to get a sorted list, extracted elements are added to the head of a linked list
+
+#### Time Complexity
+
+$O(N \log N)$ , as ExtractMax() which takes $O(\log N)$  time is called $N$  times
+
+### UpdateKey(i, newVal)
+
+Updates the key value of Node with index i with newVal
+
+#### Implementation
+
+Simply call `A[i] = newVal;`
+
+Then, call both shiftUp(i) and shiftDown(i) on it, of which only at most 1 of max heap property restoration operation will be successful. 
+
+#### Time Complexity
+
+$O(\log n)$ as at most move up to root or move down to leaf, provided we know index i.
+
+### Delete(i)
+
+Delete an existing value that is already inside the binary heap (is not the root)
+
+#### Implementation
+
+Simply update:
+
+- `A[i] = A[1] + 1` a number greater than the current root, then call shiftUp(i)
+- Alternatively, `updateKey(i, A[1] + 1)` does the same
+- This floats index i to the new root, in which we can call ExtractMax() once to remove
+
+#### Time Complexity
+
+$O(\log n)$, provided we know i.
+
+#### What if we are given `oldVal` instead of the index *i*?
+
+Looping through index *i* will cost us $O(n)$  
+
+Instead we can use a Hash Table to help us retrieve in $O(1)$.
