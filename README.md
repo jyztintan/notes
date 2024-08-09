@@ -1,16 +1,14 @@
+# Notes for SoCcess
+
+This website was created to store and share notes from the various modules that I have taken in my time in the National University of Singapore, School of Computing (NUS SoC).
+
+Feel free to explore the notes, and if you find them helpful, don't hesitate to share them with others in the SoC community.
+
 # Nextra Docs Template 
 
-This is a template for creating documentation with [Nextra](https://nextra.site).
+This website was created with the [Nextra](https://nextra.site) template.
 
 [**Live Demo →**](https://nextra-docs-template.vercel.app)
-
-[![](.github/screenshot.png)](https://nextra-docs-template.vercel.app)
-
-## Quick Start
-
-Click the button to clone this repository and deploy it on Vercel:
-
-[![](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fshuding%2Fnextra-docs-template&showOptionalTeamCreation=false)
 
 ## Local Development
 
