@@ -114,72 +114,19 @@ $O(E)$, much more efficient than Adjacency Matrix and as efficient as Adjacency 
 
 ## Applications of Graph DS
 
-| Application | Adjacency Matrix | Adjacency List | Edge List |
-| --- | --- | --- | --- |
-| Counting V | Number of Rows
+| Application                                  | Adjacency Matrix                                          | Adjacency List                                             | Edge List                                                                                   |
+| -------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Counting V**                               | Number of Rows<br></br>Time: $O(1)$ (depending on implementation) | Number of Rows<br></br>Time: $O(1)$ (depending on implementation) | Not possible with edge list alone, because there could be isolated vertices.                 |
+| **Counting Edges**                           | Iterate through the entire matrix and count all nonzero entries<br></br>Time: $O(V^2)$ | $\sum len(list(v)), \forall v \in V$<br></br>Time: $O(V+E)$     | Number of Rows in the edge list<br></br>Time: $O(1)$                                               |
+| **Getting list of neighbours for vertex $v$** | Loop through all columns of the row `AM[u][j]` and when non-zero, report pair `(j, AM[u][j])`<br></br>Time: $O(V)$ | Return `AL[v]`<br></br>Time: $O(1)$                             | Iterate through the list and note down the vertices that are adjacent to vertex $v$<br></br>Time: $O(E)$ |
+| **Enumerating Neighbours of a vertex, $u$**  | Loop through all columns of `AM[u][j]` and when non-zero, report pair `(j, AM[u][j])`<br></br>Time: $O(V)$ | Scan `AL[u]`, output $k$ neighbours of vertex $u`<br></br>Time: $O(E)$, it is possible for all edges to be connected to vertex `u` so upper bounded | Iterate through the list and note down the vertices that are adjacent to vertex `u`<br></br>Time: $O(E)$ |
+| **Checking existence of Edge($u,v$)**        | Check if `AM[u][v] == 0`<br></br>Time: $O(1)$                   | Check if `AL[u].contains(v)`<br></br>Time: $O(E)$, it is possible for all edges to be connected to vertex `u` so upper bounded<br></br>$O(\log E)$ if binary search on sorted list | Just iterate through the list and check if the edge is inside<br></br>Time: $O(E)$                 |
 
-Time: $O(1)$ (depending on implementation) | Number of Rows
-
-Time: $O(1)$ (depending on implementation) | Not possible with edge list alone, because there could be isolated vertices. |
-| Counting Edges | Iterate through the entire matrix and count all nonzero entries 
-
-Time: $O(V^2)$ | $\sum len(list(v)), $
-$
-\forall v \in V$
-
-Time: $O(V+E)$ | Number of Rows in the edge list
-
-Time: $O(1)$ |
-| Getting list of neighbours for vertex $v$ | Loop through all columns of the row 
-AM[u][j] and when non-zero, report pair 
-(j, AM[u][j]) 
-
-Time: $O(V)$ | Return AL[v]
-
-Time: $O(1)$ | Iterate through the list and note down the vertices that are adjacent to vertex $v$
-
-Time: $O(E)$ |
-| Enumerating Neighbours of a vertex, $u$ | Loop through all columns of 
-AM[u][j] and when non-zero, report pair 
-(j, AM[u][j]) 
-
-Time: $O(V)$ | Scan AL[u], output $k$ neighbours of vertex $u$
-
-Time: $O(E), $ it is possible for all edges to be connected to vertex $u$ so upper bounded | Iterate through the list and note down the vertices that are adjacent to vertex $u$
-
-Time: $O(E)$ |
-| Checking existence of 
-Edge($u,v)$ | Check if 
-AM[u][v] == 0
-
-Time: $O(1)$ | Check if 
-AL[u].contains(v)
-
-Time: 
-$O(E)$ it is possible for all edges to be connected to vertex $u$ so upper bounded
-$O(\log E)$ if binary search on sorted list | Just iterate through the list and check if the edge is inside
-
-Time: $O(E)$ |
 
 ## Graph Conversion
 
-| From\To | Adjacency Matrix | Adjacency List | Edge List |
-| --- | --- | --- | --- |
-| Adjacency Matrix
-All conversions in 
-Time $O(V^2)$ | - | 1. Loop through all cells 
-2. If AM[v][u] == 1:
-3. AL[v].append(u) | 1. Loop through all cells 
-2. If AM[v][u] == 1:
-3. EL.append((v,u)) |
-| Adjacency List
-All conversions in 
-Time $O(V+E)$ | 1. Set all cells as 0
-2. for all j for all i in AL
-3. AM[i][j] = 1 | - | 1. For all j for all i in AL
-2. EL.append((i,j)) |
-| Edge List | 1. Set all cells as 0
-2. for (v, u) in EL
-3. AM[v][u] = 1 | 1. Set all cells as 0
-2. for (v, u) in EL
-3. AL[v].append(u) | - |
+| From\To          | Adjacency Matrix                                    | Adjacency List                                        | Edge List                                           |
+| ---------------- | -------------------------------------------------- | ---------------------------------------------------- | -------------------------------------------------- |
+| **Adjacency Matrix** ($O(V^2)$) | -  | 1. Loop through all cells<br></br>2. If `AM[v][u] == 1`: `AL[v].append(u)` | 1. Loop through all cells<br></br>2. If `AM[v][u] == 1`:`EL.append((v,u))` |
+| **Adjacency List** ($O(V+E)$) | 1. Set all cells as `0`<br></br>2. For all `j` for all `i` in `AL`: `AM[i][j] = 1` | - | 1. For all `j` for all `i` in `AL`:`EL.append((i,j))` |
+| **Edge List**    | 1. Set all cells as `0`<br></br>2. For `(v, u)` in `EL`: `AM[v][u] = 1` | 1. Set all cells as `0`<br></br>2. For `(v, u)` in `EL`<br></br>3. `AL[v].append(u)` | - |
