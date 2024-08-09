@@ -2,7 +2,7 @@ import React from 'react';
 import { DocsThemeConfig } from 'nextra-theme-docs';
 
 const config: DocsThemeConfig = {
-  logo: <span>Byte-Sized Notes</span>,
+  logo: <span>Notes to SoCcess</span>,
   project: {
     link: 'https://github.com/jyztintan/notes',
   },
