@@ -7,5 +7,6 @@
   "binary-search-tree": "Binary Search Tree",
   "graph-ds": "Graph Data Structures",
   "graph-traversal": "Graph Traversal",
-  "sssp": "Single Source Shortest Path"
+  "sssp": "Single Source Shortest Path",
+  "mst": "Minimum Spanning Tree"
 }

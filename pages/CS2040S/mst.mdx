@@ -1,0 +1,62 @@
+# Minimum Spanning Trees (MST)
+
+An spanning tree is a subgraph of a connected undirected weighted graph G, such that it is a tree that connects all vertices in G
+
+A **Minimum** spanning tree is a spanning tree of G such that it has the smallest total weight among the possible spanning trees
+
+2 **greedy** algorithms to help us find an MST of a graph
+
+## Kruskal’s Algorithm
+
+1. *Efficiently* Sort the edges in non-decreasing weight (greedy aspect) → usually stored in an Edge List data structure)
+2. Loop through these sorted edges, and greedily take the next edge if it does not create any cycles  We can implement the main loop using UFDS, and use isSameSet(u, v) to test if adding an edge (u,v) is a cycle.
+If isSameSet(u,v) = false (ie not a cycle), we greedily take this next smallest edge and add to T (call UnionSet(u,v)) 
+
+<aside>
+💡 Loop Invariant: Every edge added into Tree T by Kruskal’s algorithm is part of the MST
+
+</aside>
+
+### Time Complexity
+
+1. Sorting: Using any $O(E \log E) = O(E\log V)$  sorting algorithm
+2. Main loop: The UFDS operations run in $O(1)$ time, so main loop runs in $O(E)$  time for number of edges 
+3. Total upper bounded time complexity: $O(E \log V)$
+
+## Prim’s Algorithm
+
+Requires a PQ data structure (use binary heap/bBST) to dynamically order considerable edges based on non-decreasing weight. 
+
+Requires a AL data structure for fast neighbour enumeration of a vertex
+
+Requires a Boolean array (DAT) to represent if vertex has been taken → help prevent cycles
+
+1. Prim’s algorithm starts from a designated source vertex *s*
+2. Enqueue all edges incident to *s* into the PQ 
+3. Greedy loop: if the vertex v of the front-most edge pair has not been visited, extend the tree to include v and enqueue edges connected to v in PQ. Otherwise, discard edge e.
+
+### Greedy
+
+At each step of the main loop, we always attempt to select the next valid edge e with minimal weight!
+
+### Time Complexity
+
+$O(E\log V)$ 
+
+1. We process each edge one at a time
+2. For every edge, we call ExtractMax() and Insert() from a PQ in $O(\log E) = O(\log V)$  time 
+
+<aside>
+💡 Note that in trees, $E = V -1$ and $V < E$
+
+</aside>
+
+## Other Applications
+
+### Minimum Spanning Subgraph
+
+Given that certain edges must be in the tree, then we can find the Minimum Spanning Subgraph which contain these edges
+
+### Minimum Spanning Forrest
+
+A **Minimum Spanning Forrest** is a collection of Minimum Spanning Trees (MSTs) in a graph where each connected component is a tree. It can be found by applying Kruskal's or Prim's algorithm separately on each connected component of the graph.
