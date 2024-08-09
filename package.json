@@ -1,7 +1,8 @@
 {
-  "name": "nextra-docs-template",
+  "name": "notes-website-jyztintan",
   "version": "0.0.1",
-  "description": "Nextra docs template",
+  "description": "Self-written notes by Justin Tan @jyztintan for NUS CS modules",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,20 +10,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shuding/nextra-docs-template.git"
+    "url": "git+https://github.com/jyztintan/notes.git"
   },
-  "author": "Shu Ding <g@shud.in>",
+  "author": "Justin Tan <justintanwk2001@gmail.com>",
+  "contributors": [
+    "Shu Ding <g@shud.in> (original Nextra template)"
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shuding/nextra-docs-template/issues"
+    "url": "https://github.com/jyztintan/notes/issues"
   },
-  "homepage": "https://github.com/shuding/nextra-docs-template#readme",
+  "homepage": "https://github.com/jyztintan/notes#readme",
   "dependencies": {
+    "katex": "^0.16.11",
     "next": "^13.0.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "rehype-katex": "^7.0.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "18.11.10",
