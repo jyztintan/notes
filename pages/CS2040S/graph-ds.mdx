@@ -1,0 +1,185 @@
+# Graph Data structures
+
+## Properties of Graph
+
+- Made up of vertices/nodes and edges/lines that connect these vertices
+- Directed/Undirected (to represent association)
+- Weighted/Unweighted (represent a numerical association for each edge)
+
+### Simple Graph
+
+- No self-loop edges
+- No multiple/parallel edges (edges between same pair of vetices)
+
+> 💭 Notably, the range of the number of edges in a simple graph is $[0, V^2]$
+
+### Terminology
+
+**Incident:** An edge is **incident** with its 2 end-point vertices
+
+**Adjacent:** 2 vertices are **adjacent** if they are incident with a common edge. This might differ in a directed graph where say u → v, then v is adjacent to u but not u adjacent to v
+
+**Degree:** The degree of a vertex is the number of edges it is incident with. Has to be differentiated in a directed graph (ie in-degree, out-degreee)
+
+**Isolated vertex:** A vertex with degree 0
+
+**Subgraph:** A smaller graph that contains a subset of vertices and edges of the original graph
+
+**Path:** A sequence of vertices such that there is an edge between **$v_i, v_{i+1} \forall i ∈ [0..n-1]$**
+
+**Simple path:** A path with no repeated vertex
+
+**Connected Graph:** There exists a path between every pair of distinct vertices in the graph
+
+**Connected Component:** 
+
+- Component is a subgraph of the original graph
+- Component is connected
+- No connected subgraph of the original graph has this component as a subgraph and contains verticers/edges not in the component. Essentially, the component is the maximal subgraph that satisfies the above criteria
+
+<aside>
+💭 In a directed graph, strongly connected components if there is a path between every pair of vertices in the component.
+
+</aside>
+
+**Cycle:** Path that starts and ends with the same vertex
+
+**Acyclic graph:** Graph that contains no cycle
+
+**Trivial Cycle:** Each undirected edge cases a trivial cycle (of length 2) → not conventionally classified as a cycle
+
+**Sparse Graph:** A graph in which the number of edges is much less than the possible number of edge
+
+**Source/target:** In an edge $(u,v)$ , $u$ is the source vertex and $v$  is the target vertex → notably for directed graphs.
+
+### Special Graphs
+
+- Tree
+    - An undirected graph in which any two vertices are connected by exactly one path
+    - Connected acyclic undirected sparse graph
+- Complete Graph
+    - Every pair of vertices are connected by an edge
+    - **$E = V*(V-1)/2$** edges
+    - Densest simple graph
+    - Complete Digraph: $E = V*(V-1)$
+- Bipartite Graph
+    - A set of graph vertices decomposed into two disjoint sets such that no two graph vertices within the same set are adjacent
+    - Free from odd-length cycle
+    - Is complete when all m vertices from 1 disjoint set are connected to all n vertices in the other disjoint set
+
+<aside>
+💭 A Tree is also a Bipartite Graph, i.e., all vertices on the even levels form one set, and all vertices on the odd levels form the other set.
+
+</aside>
+
+- Directed Acyclic Graph
+    - Relevant for Dynamic Programming
+    - Has at least one topological sort/order
+- Planar Graph
+- Line Graph
+- Star Graph
+- Wheel Graph
+
+## Graph Data Structure
+
+Graph Data Structures can be represented in 3 different ways, Adjacency Matrix, Adjacency List and Edge List. There is no one best representation, and we should choose which to implement depending on our usage.
+
+### Adjacency Matrix
+
+Square matrix, where entry `AM[i][j]` represents the edge’s weight from vertex i to j. For unweighted graphs, we can set weight = 1 for all edge weights
+
+> 💭 We usually use `AM[i][j] = 0` to denote that there is no edge (i,j). However, if the graph contains 0-weighted edge(s), then we need to use another symbol to indicate no edge (for e.g., -1, `None`, `null`)
+
+#### Space Complextiy
+
+$O(V^2 )$, regardless of how sparse the graph is.
+
+### Adjacency List
+
+Array of V lists, one list for each vertex where `AL[i]` stores the list of i’s neighbours.
+
+For weighted graphs, we can store pairs representing (neighbour vertex number, weight of edge)
+
+#### Space Complexity
+
+$O(V+E)$, much more efficient than Adjacency Matrix and usually the default graph data structure in most graph algorithms.
+
+### Edge List
+
+Collection of edges with both connecting vertices and their weights, sorted by increasing weight (Kruskal’s algorithm) for Minimum Spanning Tree problems.
+
+#### Space Complexity
+
+$O(E)$, much more efficient than Adjacency Matrix and as efficient as Adjacency List 
+
+## Applications of Graph DS
+
+| Application | Adjacency Matrix | Adjacency List | Edge List |
+| --- | --- | --- | --- |
+| Counting V | Number of Rows
+
+Time: $O(1)$ (depending on implementation) | Number of Rows
+
+Time: $O(1)$ (depending on implementation) | Not possible with edge list alone, because there could be isolated vertices. |
+| Counting Edges | Iterate through the entire matrix and count all nonzero entries 
+
+Time: $O(V^2)$ | $\sum len(list(v)), $
+$
+\forall v \in V$
+
+Time: $O(V+E)$ | Number of Rows in the edge list
+
+Time: $O(1)$ |
+| Getting list of neighbours for vertex $v$ | Loop through all columns of the row 
+AM[u][j] and when non-zero, report pair 
+(j, AM[u][j]) 
+
+Time: $O(V)$ | Return AL[v]
+
+Time: $O(1)$ | Iterate through the list and note down the vertices that are adjacent to vertex $v$
+
+Time: $O(E)$ |
+| Enumerating Neighbours of a vertex, $u$ | Loop through all columns of 
+AM[u][j] and when non-zero, report pair 
+(j, AM[u][j]) 
+
+Time: $O(V)$ | Scan AL[u], output $k$ neighbours of vertex $u$
+
+Time: $O(E), $ it is possible for all edges to be connected to vertex $u$ so upper bounded | Iterate through the list and note down the vertices that are adjacent to vertex $u$
+
+Time: $O(E)$ |
+| Checking existence of 
+Edge($u,v)$ | Check if 
+AM[u][v] == 0
+
+Time: $O(1)$ | Check if 
+AL[u].contains(v)
+
+Time: 
+$O(E)$ it is possible for all edges to be connected to vertex $u$ so upper bounded
+$O(\log E)$ if binary search on sorted list | Just iterate through the list and check if the edge is inside
+
+Time: $O(E)$ |
+
+## Graph Conversion
+
+| From\To | Adjacency Matrix | Adjacency List | Edge List |
+| --- | --- | --- | --- |
+| Adjacency Matrix
+All conversions in 
+Time $O(V^2)$ | - | 1. Loop through all cells 
+2. If AM[v][u] == 1:
+3. AL[v].append(u) | 1. Loop through all cells 
+2. If AM[v][u] == 1:
+3. EL.append((v,u)) |
+| Adjacency List
+All conversions in 
+Time $O(V+E)$ | 1. Set all cells as 0
+2. for all j for all i in AL
+3. AM[i][j] = 1 | - | 1. For all j for all i in AL
+2. EL.append((i,j)) |
+| Edge List | 1. Set all cells as 0
+2. for (v, u) in EL
+3. AM[v][u] = 1 | 1. Set all cells as 0
+2. for (v, u) in EL
+3. AL[v].append(u) | - |
