@@ -1,0 +1,37 @@
+# Quick Sort vs Merge Sort
+
+In this page, we will compare the various aspects of [(Randomised) Quick Sort](./randomised-quick-sort.mdx) and [Merge Sort](./merge-sort.mdx) algorithms
+
+## Time Complexity
+
+### Quick Sort
+
+- Depth of recursion causes Quick Sort to use $O(\log N)$  space in the stack
+- Each level takes $O(N)$  comparisons
+- Time Complexity: $O(N\log N)$
+
+### Merge Sort
+
+- Merging a sorted list from two sorted lists → $O(N)$ = work done at every level
+- Number of layers in merge sort = $\log n$
+- Hence merge sort uses $O(N\log N)$  time complexity
+
+### Conclusion
+
+However,,,, the **constant factor** of quicksort is much lower than that of merge sort on average.
+
+By the use of randomized pivots, we can reduce the chances of $O(N^2)$  happening…
+
+## Space Complexity
+
+### Quick Sort
+
+Depth of recursion causes Quick Sort to use $O(\log N)$  space in the stack
+
+### Merge Sort
+
+- $O(N)$  space to store the auxiliary array
+
+## Stability
+
+MS is stable but QS is not
