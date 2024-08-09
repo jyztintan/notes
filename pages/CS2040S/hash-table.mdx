@@ -1,0 +1,162 @@
+# Hash Table
+
+Map keys to values (may be non-Integer keys/values) without using comparisons 
+
+## Hash Function
+
+### Advantages
+
+Hashing allows us to associate every value of type <T> with an integer, where T can be any arbitrary type. Hence we are able to 
+
+- Map non-Integer keys to Integer keys
+- Map large Integers to smaller Integers
+
+> 💭 Note that the hash function is usually not injective so we cannot “undo” a hash (inverse hashing)
+
+### Hashing Strings
+
+```java
+int hash_function(string v) { // assumption 1: v uses ['A'..'Z'] only
+  int sum = 0;                // assumption 2: v is a short string
+  for (auto& c : v) // for each character c in v
+    sum = ((sum*26)%M + (c-'A'+1))%M; // M is table size
+  return sum;
+}
+```
+
+Mapping Strings to Integer keys. The point of this is for us to obtain a key value of strings so that we can find them in our hashmap.
+
+### After Hashing
+
+With hashing, we can now implement the following Table ADT operations using Integer array (instead of Boolean array) as follows:
+
+1. Search(v): Check if **A[h(v)] != -1** (we use -1 for an empty cell assuming **v ≥ 0**),
+2. Insert(v): Set **A[h(v)] = v** (we hash **v** into **h(v)** so we need to somehow record key **v**),
+3. Remove(v): Set **A[h(v)] = -1** 
+
+If we have keys that map to satellite data and we want to record the original keys too, we can implement the Hash Table using pair of (Integer, satellite-data-type) array as follows:
+
+1. Search(v): Return **A[h(v)]**, which is a **pair (v, satellite-data)**, possibly empty,
+2. Insert(v, satellite-data): Set **A[h(v)] = pair(v, satellite-data)**,
+3. Remove(v): Set **A[h(v)] = (empty pair)**
+
+### Properties of Hash
+
+1. Fast - $O(1)$ 
+2. Deterministic - If performing hashing on the same key, we should always get the same value
+3. Distribute Key evenly - Reduce chances of hash collision, which takes time to resolve.
+
+The main idea is to ensure that  $1 + \alpha$  (Cost of hash + traversing LL) <<<<< n
+
+ 
+
+#keys > #values so by PHP then we will get collision for one of our keys —> need to resolve 
+
+### Best Practice
+
+**h(v) = v%M**
+
+- M should be a reasonably large prime number
+- M should not be near a power of 2
+- Size M is > 2x larger than the expected number of keys N
+- Low load factor $\alpha = \frac{M}{N}$ , M = number of slots in Hash Table, N = number of keys
+    - Albeit at expense of a lot of empty spaces
+    - Fewer chance for collision
+    - Faster probe sequence
+    - Shorter chains in separate chaining
+
+## Open Addressing
+
+Hashed keys are located in a single array. The hash code of a key gives its base address.
+
+Collisions are resolved by checking/probing multiple alternative addresses in the table based on a certain rule
+
+**M** = HT.length = the current hash table size,
+
+`base`= key%HT.length
+
+`step` = the current probing step,
+
+`secondary` = smaller_prime - key%smaller_prime (avoid zero)
+
+We will soon see that the probing sequences of the three modes are:
+
+#### Linear Probing
+
+Calculated by i=(base+step*1) % M 
+
+- Essentially when there is a collision put to the right
+- Limitation: Primary Clustering
+
+#### Quadratic Probing
+
+Calculated by i=(base+step*step) % M
+
+- When there is a collision, (index + one of [1, 4, 9, 16, 25 …])%M
+- Limitation: Not guaranteed when high load value, secondary clustering may occur
+- Resolution: If load factor < 0.5 and table size is an odd prime, we can guarantee that we eventually will find an empty slot
+
+> 💭 Theoretically, secondary clusters are rare and should not happen because the hash function ***should*** distribute the keys evenly
+
+#### Double Hashing
+
+Calculated by i=(base+step*secondary) % M
+
+- When there is a collision, (index + secondary hash fx)%M
+- Limitation: Increased computational complexity
+
+#### Lazy Deletion
+
+For hash tables implemented by open addressing, we may ruin the probing sequence if we completely remove elements, causing us to be unable to find our object again.
+
+Hence, when removing values, we instead overwrite slots with a special `DEL` value that can allow insertion (as if available), but is probed through when searching (as if occupied).
+
+### Rehashing
+
+Only necessary for Hash Table with open addressing
+
+- Performance gets worse when $\alpha  \rarr 1$
+- Quadratic probing may fail when $\alpha \geq 0.5$
+
+Rehashing is necessary when these occur → rebuild new hash table, recalculate hashes and re-insert everything. Usually we use a new hash table with size $\approx$  2x the original.
+
+#### Time complexity
+
+$O(N+M)$
+????? 
+
+## Closed Addressing
+
+Hash code of a key gives its fixed/closed base address. Collisions are resolved by appending the collided keys inside an auxiliary data structure identified by the base address
+
+#### Separate Chaining
+
+- Collection of Linked List
+- **M** copies of auxiliary data structures, usually DLL. If two keys **a** and **b** both have the same hash value **i**, both will be appended to the (front/back) of Doubly Linked List **i** (using head/tail pointer) in $O(1)$)
+- Location where keys are slotted in is completely dependent on the hash function
+- Scan through whole linked list to find the object
+
+#### Time Complexity
+
+$O(1 + \alpha) \approx O(1)$ 
+
+#### Space Complexity
+
+$O(N+M)$
+, M = number of elements, n = size of table
+
+## Separate Chaining
+
+- Used for Java HashMap as it only uses one hash function
+- Better if potentially a lot of deletions
+- Table never “fills up”
+- Cache performance is not that good
+
+## Open Addressing
+
+- Requires usage of DEL marker
+- Good for Hash Table applications with minimal deletions
+- Prolonged probing length after many insertions then deletions
+- No extra memory overhead
+- Table may become full
+- Better time complexity if $\alpha \lt 50\%$
