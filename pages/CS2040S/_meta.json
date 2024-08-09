@@ -1,4 +1,6 @@
 {
   "sorting": "Sorting",
-  "linked-lists": "Linked List"
+  "linked-lists": "Linked List",
+  "binary-heap": "Binary Heap",
+  "ufds": "Union-Find Disjoint Sets"
 }
