@@ -1,0 +1,18 @@
+# Finding Target Pairs
+
+**$x, y ∈ A$ , such that $x + y = z$**
+
+## Naive Strategy
+
+- Check every element with every other element whether it can be summed up to a sum z
+- Time Complexity $O(N^2)$, limited to array of $size \le 10000$
+
+## 2-Pointer Strategy
+
+- Low-pointer $l$, and one high-pointer $h$ , initialized to point to the first and last element of the array
+- While `$h >  l$`
+- If `$arr[l] + arr[h] > z$`, `$h$ -= 1`
+- If `$arr[l] + arr[h] < z$`, `$l$ += 1`
+- If `$arr[l] + arr[h] == z$`, add $l$ and $h$  to output array, `$l$ += 1` and `$h$ -= 1`
+
+#### Time Complexity: $O(n)$, $n = len(A)$

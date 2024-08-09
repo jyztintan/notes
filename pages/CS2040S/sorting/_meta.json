@@ -1,0 +1,17 @@
+{
+  "bubble-sort": "Bubble Sort",
+  "selection-sort": "Selection Sort",
+  "insertion-sort": "Insertion Sort",
+  "merge-sort": "Merge Sort",
+  "randomised-quick-sort": "Randomised Quick Sort",
+  "quick-sort-vs-merge-sort": "Quick Sort vs Merge Sort",
+  "counting-sort": "Counting Sort",
+  "radix-sort": "Radix Sort",
+  "quick-select": "Quick Select",
+  "binary-search": "Binary Search",
+  "order-statistics": "Order Statistics",
+  "uniqueness-operation": "Uniqueness Operation",
+  "counting-specific-elements": "Counting Specific Elements",
+  "union-of-2-arrays": "Union of 2 Arrays",
+  "finding-target-pairs": "Finding Target Pairs"
+}

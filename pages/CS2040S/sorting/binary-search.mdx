@@ -1,0 +1,17 @@
+# Binary Search 
+
+## Implementation
+
+- It can only works on data that is sorted, usually in increasing order
+- We want to search for `val` in a sorted list
+- Check the halfway point, `mid`. Check if `val > mid` or `val < mid`.
+    - If `val > mid`, we can just omit the entire left side
+    - If `val < mid`, we can just omit the entire right side
+- Repeat on the new midpoint and recursively look for `val`
+- Binary search terminates after $O(\log n)$ rounds → discard half every round → $2^n$ elements will be reduced to 1 in roughly $n$  rounds.
+
+## Usage
+
+- `Collections.binarySearch()`
+- If element is in the list, returns index of element in $O(\log n)$ time.
+- Otherwise, returns $(-n-1)$, in which $n$ is the supposed actual index if it were to exist in the list.
