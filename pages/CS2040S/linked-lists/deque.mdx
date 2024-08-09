@@ -1,0 +1,18 @@
+# Deque 
+
+The double-ended queue (deque) is an Abstract Data Type that generalizes a Queue, for which elements can be added to or removed only from **either** the front (head) or back (tail).
+
+## Implementation
+
+Protected Doubly Linked List where we can only:
+
+- Search the head/tail item (peek front/back) at $O(1)$
+- Insert item to head/tail at $O(1)$
+- Remove item at head/tail at $O(1)$
+
+> 💡 All these operations are O(1) because we can traverse forward and backwards from the head/tail pointer
+
+## Applications
+
+- Finding shortest paths 0/1-weighted graphs using modified BFS
+- Sliding window techniques
