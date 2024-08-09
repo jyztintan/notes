@@ -2,7 +2,9 @@
 
 This website was created to store and share notes from the various modules that I have taken in my time in the National University of Singapore, School of Computing (NUS SoC).
 
-Feel free to explore the notes, and if you find them helpful, don't hesitate to share them with others in the SoC community.
+Explore the website [here](https://notes-jyztintan.vercel.app/)! 
+
+Feel free to raise an issue for feedback or any bugs spotted.
 
 # Nextra Docs Template 
 
