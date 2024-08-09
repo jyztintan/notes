@@ -1,0 +1,8 @@
+{
+  "avl-tree": "AVL Tree",
+  "search": "Search Vertex",
+  "successor-predecessor": "Successor and Predecessor",
+  "insert-remove": "Insert and Remove Vertex",
+  "in-order-traversal": "In-order Traversal",
+  "select-rank": "Order Statistics of vertex"
+}

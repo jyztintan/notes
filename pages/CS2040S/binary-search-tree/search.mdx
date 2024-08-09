@@ -1,0 +1,28 @@
+# Search Vertices
+
+## Implementation
+
+```java
+Set this = root 
+if this == null
+  return null
+else if this key == search value
+  return this
+else if this key < search value
+  search right
+else search left
+```
+
+> 💡 The `higher()` function in Java TreeSet has a very similar implementation to search(v) but returns the smallest value > v (unless v > the largest element in the BST then there is no lower bound)
+
+Implemented in $O(h)$  time complexity, where $h$ is the height of the BST. 
+
+### SearchMin() and SearchMax()
+
+SearchMin() - Return the value of the left most leaf vertex
+
+SearchMax() - Return the value of the right most leaf vertex
+
+Implemented in $O(h)$  time complexity, where $h$ is the height of the BST.
+
+Insert(v) - Implemented in $O(N)$ as we need to use an insertion-sort ish strategy to ensure array remains sorted

@@ -2,5 +2,7 @@
   "sorting": "Sorting",
   "linked-lists": "Linked List",
   "binary-heap": "Binary Heap",
-  "ufds": "Union-Find Disjoint Sets"
+  "ufds": "Union-Find Disjoint Sets",
+  "hash-table": "Hash Table",
+  "binary-search-tree": "Binary Search Tree"
 }
