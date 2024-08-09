@@ -1,0 +1,5 @@
+{
+  "bellman-ford": "Bellman-Ford Algorithm",
+  "dijkstra": "Dijkstra's Algorithm",
+  "dynamic-programming": "Dynamic Programming"
+}

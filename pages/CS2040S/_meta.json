@@ -5,5 +5,7 @@
   "ufds": "Union-Find Disjoint Sets",
   "hash-table": "Hash Table",
   "binary-search-tree": "Binary Search Tree",
-  "graph-ds": "Graph Data Structures"
+  "graph-ds": "Graph Data Structures",
+  "graph-traversal": "Graph Traversal",
+  "sssp": "Single Source Shortest Path"
 }
