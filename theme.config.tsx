@@ -13,6 +13,9 @@ const config: DocsThemeConfig = {
   footer: {
     text: <div style={{ textAlign: 'center', width: '100%' }}>© 2024 Justin Tan | Byte-Sized Notes</div>,
   },
+  editLink: {
+    component: null,
+  }
 };
 
 export default config;
